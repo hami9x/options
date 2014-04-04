@@ -7,7 +7,6 @@ Without the need for explaination, when we need to specify config options for so
 
 This package uses the power of Go reflections to make that task very simple. This is how you define and use a set of options with the help of this package:  
 
-Define:  
 	//An option
 	type WhateverName struct{ Value string }
 	
