@@ -19,12 +19,12 @@ This package uses the power of Go reflections to make that task very simple. Thi
 		Num  WhateverNum  `js:"num"`
 	}
 	
-	//Example convenient method for creating the master config
+	//Example convenience method for creating the master config
 	func WhateverOptions(opts ...Option) *OptionsProvider {
 		return NewOptions(&WhateverSpec{}).Options(opts...)
 	}
 	
-	//Example convenient method for retrieving the options
+	//Example convenience method for retrieving the options
 	func GetWhateverOptions(o *OptionsProvider) *WhateverSpec {
 		return o.Get().(*WhateverSpec)
 	}
