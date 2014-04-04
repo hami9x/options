@@ -44,5 +44,5 @@ This package uses the power of Go reflections to make that task very simple. Thi
 	}
 
 
-Note:
+Note:  
 Rob Pike once described a pattern for solving this problem ([link](http://commandcenter.blogspot.com/2014/01/self-referential-functions-and-design.html)). The client interface is good, it has rollbacks which is nice, but it's really really tedious to have to copy-paste dozens of lines of duplicated code for making the options, repeating the same logic for every options pack we create. It might be good for some, but for me it's unbearable. That's why this simple library is born.
