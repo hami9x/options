@@ -3,7 +3,7 @@ options
 
 This package provides a simple, flexible and convenient way of defining config options in Go.  
   
-Without the need for explaination, when we need to specify config options for something, especially when there are a lot of optional options, the naive way of using struct or function with a long list of arguments doesn't work.  
+Without the need for explanation, when we need to specify config options for something, especially when there are a lot of optional options, the naive way of using struct or function with a long list of arguments doesn't work.  
 
 This package uses the power of Go reflections to make that task very simple. This is how you define and use a set of options with the help of this package:  
 
