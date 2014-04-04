@@ -32,7 +32,7 @@ This package uses the power of Go reflections to make that task very simple. Thi
 	func main() {
 		//This is how you use the defined options
 		opts := WhateverOptions(
-			WhateverName{"n0t9r34t6cz..."},
+			WhateverName{"n0t9r34t6czn0t9r34t1n49re4tw4y"},
 			WhateverNum{99999},
 		)
 	
