@@ -11,7 +11,7 @@ type WhateverName struct{ Value string }
 //An option
 type WhateverNum struct{ Value int }
 
-//RouteSpec specifies the options
+//WhateverSpec specifies the options
 type WhateverSpec struct {
 	Name WhateverName `js:"name"`
 	Num  WhateverNum  `js:"num"`
@@ -32,7 +32,7 @@ type MySuite struct{}
 
 var _ = Suite(&MySuite{})
 
-func (s *MySuite) TestRouteOptions(c *C) {
+func (s *MySuite) TestOptions(c *C) {
 	name, num := "n0t9r34t6cz...", 999999
 	opts := WhateverOptions(
 		WhateverName{name},
