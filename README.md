@@ -13,10 +13,14 @@ This package uses the power of Go reflections to make that task very simple. Thi
 	//An option
 	type WhateverNum struct{ Value int }
 	
+	//Another option
+	type WhateverNum2 struct { Value float32 }
+	
 	//WhateverSpec specifies the list of options
 	type WhateverSpec struct {
 		Name WhateverName `js:"name"` //You may specify a tag here
 		Num  WhateverNum  `js:"num"`
+		Num2 WhateverNum2 `js:"num2"`
 	}
 	
 	//Example convenience method for creating the master config
