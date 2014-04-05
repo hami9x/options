@@ -3,7 +3,7 @@ options
 
 This package provides a simple, flexible and convenient way of defining config options in Go.  
   
-Without the need for explanation, when we want to specify config options for something, especially when there are a lot of optional options, the naive way of using struct or function with a long list of arguments doesn't work. Go doesn't provide a way to specify default arguments, or default value for struct fields. 
+When we want to specify config options for something, especially when there are a lot of optional options, the naive way of using struct or function with a long list of arguments doesn't work well in a lot of cases. Also, Go is a statically typed language, and doesn't provide a way to specify default arguments in function.
 
 This package uses the power of Go reflections to make that task very simple. This is how you define and use a set of options with the help of this package:  
 
