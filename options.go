@@ -25,11 +25,12 @@ type Option interface{}
 type OptionsProvider struct {
 	spec Spec
 	m    map[string]string
+	set  map[string]bool //the values has been set or not
 }
 
 //NewOptions creates a new OptionsProvider.
 func NewOptions(spec Spec) *OptionsProvider {
-	o := &OptionsProvider{spec, make(map[string]string)}
+	o := &OptionsProvider{spec, make(map[string]string), make(map[string]bool)}
 	v := reflect.ValueOf(spec)
 	if v.CanSet() {
 		panic(fmt.Sprintf("The spec passed in must be a pointer, got type %v",
@@ -51,11 +52,13 @@ func (o *OptionsProvider) Options(opts ...Option) *OptionsProvider {
 		if _, ok := optType.FieldByName("Value"); !ok {
 			panic(fmt.Sprintf("Option %v doesn't have a Value field.", optType.Name()))
 		}
-		field := reflect.ValueOf(o.spec).Elem().FieldByName(o.m[optType.Name()])
+		fieldName := o.m[optType.Name()]
+		field := reflect.ValueOf(o.spec).Elem().FieldByName(fieldName)
 		if !field.CanSet() || !field.IsValid() {
 			panic(fmt.Sprintf("There is no option %v.", optType.Name()))
 		}
 		field.Set(reflect.ValueOf(opt))
+		o.set[fieldName] = true
 	}
 	return o
 }
@@ -66,6 +69,11 @@ func (o *OptionsProvider) Get() interface{} {
 	return o.spec
 }
 
+//Check if the field is set
+func (o *OptionsProvider) IsSet(field string) bool {
+	return o.set[field]
+}
+
 //ExportToMap exports the options to a map
 func (o *OptionsProvider) ExportToMap() map[string]interface{} {
 	return o.ExportToMapWithTag("")
@@ -74,12 +82,16 @@ func (o *OptionsProvider) ExportToMap() map[string]interface{} {
 //ExportToMapWithTag exports the options to a map,
 //the key names in the map are determined by a specific struct tag.
 //The tags are set in the options spec.
+//Configs that have not been set don't appear in the map.
 func (o *OptionsProvider) ExportToMapWithTag(tag string) map[string]interface{} {
 	spec := reflect.ValueOf(o.spec).Elem()
 	specType := spec.Type()
 	m := make(map[string]interface{})
 	for i := 0; i < specType.NumField(); i++ {
 		exportedName := specType.Field(i).Name
+		if !o.IsSet(exportedName) {
+			continue
+		}
 		if tag != "" {
 			taggedName := specType.Field(i).Tag.Get(tag)
 			if taggedName != "" {
