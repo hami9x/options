@@ -46,10 +46,9 @@ This package uses the power of Go reflections to make that task very simple. Thi
 		m := opts.ExportToMapWithTag("js")
 		_ = m["name"].(string) //Name exported to key "name", as specified by the tag
 		
-		//c.Check(opts.IsSet("Num"), Equals, true)
-		//c.Check(opts.IsSet("Num2"), Equals, false)
-		//_, ok := m["num2"] //num2 doesn't appear in the result because it has not been set
-		//c.Check(ok, Equals, false)
+		opts.IsSet("Num") //returns true
+		opts.IsSet("Num2") //returns false
+		_, ok := m["num2"] //num2 doesn't appear in the result because it has not been set, returns false in ok
 	}
 
 
